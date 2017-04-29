@@ -1,9 +1,14 @@
 import {
   COUNTER_INCREMENT,
+  COUNTER_DOUBLE,
   increment,
+  double,
   doubleAsync,
+  counterSelector,
+  squareRootSelector,
   default as counterReducer
 } from 'routes/Counter/modules/counter'
+import { take, select } from 'redux-saga/effects'
 
 describe('(Redux Module) Counter', () => {
   it('Should export a constant COUNTER_INCREMENT.', () => {
@@ -49,61 +54,35 @@ describe('(Redux Module) Counter', () => {
     })
   })
 
-  describe('(Action Creator) doubleAsync', () => {
-    let _globalState
-    let _dispatchSpy
-    let _getStateSpy
-
-    beforeEach(() => {
-      _globalState = {
-        counter : counterReducer(undefined, {})
-      }
-      _dispatchSpy = sinon.spy((action) => {
-        _globalState = {
-          ..._globalState,
-          counter : counterReducer(_globalState.counter, action)
-        }
-      })
-      _getStateSpy = sinon.spy(() => {
-        return _globalState
-      })
-    })
-
+  describe('(Action Creator) double', () => {
     it('Should be exported as a function.', () => {
-      expect(doubleAsync).to.be.a('function')
+      expect(double).to.be.a('function')
     })
 
-    it('Should return a function (is a thunk).', () => {
-      expect(doubleAsync()).to.be.a('function')
+    it('Should return an action with type of "COUNTER_DOUBLE".', () => {
+      expect(double()).to.have.property('type', COUNTER_DOUBLE)
     })
+  })
 
-    it('Should return a promise from that thunk that gets fulfilled.', () => {
-      return doubleAsync()(_dispatchSpy, _getStateSpy).should.eventually.be.fulfilled
+  describe('(Saga) doubleAsync', () => {
+    it('Should double the value.', () => {
+      const generator = doubleAsync()
+      expect(generator.next().value).to.deep.equal(take(COUNTER_DOUBLE))
+      expect(generator.next().value).to.deep.equal(select())
     })
+  })
 
-    it('Should call dispatch and getState exactly once.', () => {
-      return doubleAsync()(_dispatchSpy, _getStateSpy)
-        .then(() => {
-          _dispatchSpy.should.have.been.calledOnce
-          _getStateSpy.should.have.been.calledOnce
-        })
+  describe('(Selector) counterSelector', () => {
+    it('Should return the value of the counter from state', () => {
+      const state = { counter: 1 }
+      expect(counterSelector(state)).to.equal(1)
     })
+  })
 
-    it('Should produce a state that is double the previous state.', () => {
-      _globalState = { counter: 2 }
-
-      return doubleAsync()(_dispatchSpy, _getStateSpy)
-        .then(() => {
-          _dispatchSpy.should.have.been.calledOnce
-          _getStateSpy.should.have.been.calledOnce
-          expect(_globalState.counter).to.equal(4)
-          return doubleAsync()(_dispatchSpy, _getStateSpy)
-        })
-        .then(() => {
-          _dispatchSpy.should.have.been.calledTwice
-          _getStateSpy.should.have.been.calledTwice
-          expect(_globalState.counter).to.equal(8)
-        })
+  describe('(Selector) squareRootSelector', () => {
+    it('Should return the square root of the current counter', () => {
+      expect(squareRootSelector({ counter: 4 })).to.deep.equal(2)
+      expect(squareRootSelector({ counter: 16 })).to.deep.equal(4)
     })
   })
 
