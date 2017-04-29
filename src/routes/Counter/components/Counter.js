@@ -5,6 +5,7 @@ import './Counter.scss'
 export const Counter = (props) => (
   <div className='counter' >
     <h2>Counter: {props.counter}</h2>
+    <h3>Counter Square Root: {props.root}</h3>
     <button onClick={props.increment}>
       Increment
     </button>
@@ -16,6 +17,7 @@ export const Counter = (props) => (
 )
 
 Counter.propTypes = {
+  root        : PropTypes.number.isRequired,
   counter     : PropTypes.number.isRequired,
   doubleAsync : PropTypes.func.isRequired,
   increment   : PropTypes.func.isRequired

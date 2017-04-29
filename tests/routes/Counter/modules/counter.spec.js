@@ -4,6 +4,8 @@ import {
   increment,
   double,
   doubleAsync,
+  counterSelector,
+  squareRootSelector,
   default as counterReducer
 } from 'routes/Counter/modules/counter'
 import { take, select } from 'redux-saga/effects'
@@ -67,6 +69,20 @@ describe('(Redux Module) Counter', () => {
       const generator = doubleAsync()
       expect(generator.next().value).to.deep.equal(take(COUNTER_DOUBLE))
       expect(generator.next().value).to.deep.equal(select())
+    })
+  })
+
+  describe('(Selector) counterSelector', () => {
+    it('Should return the value of the counter from state', () => {
+      const state = { counter: 1 }
+      expect(counterSelector(state)).to.equal(1)
+    })
+  })
+
+  describe('(Selector) squareRootSelector', () => {
+    it('Should return the square root of the current counter', () => {
+      expect(squareRootSelector({ counter: 4 })).to.deep.equal(2)
+      expect(squareRootSelector({ counter: 16 })).to.deep.equal(4)
     })
   })
 

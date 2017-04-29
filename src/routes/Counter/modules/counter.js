@@ -1,3 +1,4 @@
+import { createSelector } from 'reselect'
 import { delay } from 'redux-saga'
 import { take, put, select } from 'redux-saga/effects'
 // ------------------------------------
@@ -59,3 +60,12 @@ export function *doubleAsync () {
 export const sagas = [
   doubleAsync
 ]
+
+// ------------------------------------
+// Selectors
+// ------------------------------------
+export const counterSelector = state => state.counter
+export const squareRootSelector = createSelector(
+  counterSelector,
+  counter => Math.sqrt(counter)
+)

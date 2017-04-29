@@ -9,7 +9,8 @@ describe('(Component) Counter', () => {
   beforeEach(() => {
     _spies = {}
     _props = {
-      counter : 5,
+      counter : 4,
+      root: 2,
       ...bindActionCreators({
         doubleAsync : (_spies.doubleAsync = sinon.spy()),
         increment   : (_spies.increment = sinon.spy())
@@ -27,9 +28,15 @@ describe('(Component) Counter', () => {
   })
 
   it('Should render props.counter at the end of the sample counter <h2>.', () => {
-    expect(_wrapper.find('h2').text()).to.match(/5$/)
+    expect(_wrapper.find('h2').text()).to.match(/4$/)
     _wrapper.setProps({ counter: 8 })
     expect(_wrapper.find('h2').text()).to.match(/8$/)
+  })
+
+  it('Should render props.root at <h3> that corresponds to the square root of counter value.', () => {
+    expect(_wrapper.find('h3').text()).to.match(/2$/)
+    _wrapper.setProps({ root: 4 })
+    expect(_wrapper.find('h3').text()).to.match(/4$/)
   })
 
   it('Should render exactly two buttons.', () => {
@@ -41,10 +48,6 @@ describe('(Component) Counter', () => {
 
     beforeEach(() => {
       _button = _wrapper.find('button').filterWhere(a => a.text() === 'Increment')
-    })
-
-    it('has bootstrap classes', () => {
-      expect(_button.hasClass('btn btn-default')).to.be.true
     })
 
     it('Should dispatch a `increment` action when clicked', () => {
@@ -62,10 +65,6 @@ describe('(Component) Counter', () => {
 
     beforeEach(() => {
       _button = _wrapper.find('button').filterWhere(a => a.text() === 'Double (Async)')
-    })
-
-    it('has bootstrap classes', () => {
-      expect(_button.hasClass('btn btn-default')).to.be.true
     })
 
     it('Should dispatch a `doubleAsync` action when clicked', () => {
