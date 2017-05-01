@@ -1,5 +1,19 @@
 # React Redux Starter Kit
 
+Fork of @davezuko's react-redux-starter-kit, but this one is a little bit opinionated on the preferred tech stack, I also removed bootstrap framework to reduce stylings to bare minimum, but I kept normalize.css.
+
+So far, I have added:
+
+* redux-saga
+* reselect
+
+Below are things I am considering to add to this opinionated starter-kit
+
+- [ ] ImmutableJS
+- [ ] Recompose
+- [ ] Lodash
+- [ ] Styled Components
+
 [![Join the chat at https://gitter.im/davezuko/react-redux-starter-kit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/davezuko/react-redux-starter-kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
 [![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
@@ -35,6 +49,9 @@ Finally, This project wouldn't be possible without the help of our many contribu
 ## Features
 * [react](https://github.com/facebook/react)
 * [redux](https://github.com/rackt/redux)
+* [redux-saga](https://github.com/redux-saga/redux-saga)
+* [reselect](https://github.com/reactjs/reselect)
+* [immutablejs](https://github.com/facebook/immutable-js)
 * [react-router](https://github.com/rackt/react-router)
 * [webpack](https://github.com/webpack/webpack)
 * [babel](https://github.com/babel/babel)
