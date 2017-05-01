@@ -3,8 +3,8 @@ import DuckImage from '../assets/Duck.jpg'
 import './HomeView.scss'
 
 export const HomeView = () => (
-  <div>
-    <h4>Welcome!</h4>
+  <div className='homeView'>
+    <h4 className='homeView__title'>Welcome!</h4>
     <img
       alt='This is a duck, because Redux!'
       className='duck'

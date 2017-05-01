@@ -3,8 +3,8 @@ import { IndexLink, Link } from 'react-router'
 import './Header.scss'
 
 export const Header = () => (
-  <div>
-    <h1>React Redux Starter Kit</h1>
+  <div className='header'>
+    <h1 className='header__title'>React Redux Starter Kit</h1>
     <IndexLink to='/' activeClassName='route--active'>
       Home
     </IndexLink>
