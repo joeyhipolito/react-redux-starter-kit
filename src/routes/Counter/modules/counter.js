@@ -1,15 +1,12 @@
 import { createSelector } from 'reselect'
 import { delay } from 'redux-saga'
 import { take, put, select } from 'redux-saga/effects'
-// ------------------------------------
-// Constants
-// ------------------------------------
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
-export const COUNTER_DOUBLE = 'COUNTER_DOUBLE'
 
-// ------------------------------------
-// Actions
-// ------------------------------------
+// Constants ---------------------- {{{
+export const COUNTER_DOUBLE = 'COUNTER_DOUBLE'
+// -------------------------------- }}}
+
+// Actions ------------------------ {{{
 export function increment (value = 1) {
   return {
     type    : COUNTER_INCREMENT,
@@ -27,27 +24,26 @@ export const actions = {
   increment,
   double
 }
+// -------------------------------- }}}
 
 // ------------------------------------
-// Action Handlers
-// ------------------------------------
+// Action Handlers ---------------- {{{
 const ACTION_HANDLERS = {
   [COUNTER_INCREMENT] : (state, action) => state + action.payload
 }
+// -------------------------------- }}}
 
-// ------------------------------------
-// Reducer
-// ------------------------------------
+// Reducer ------------------------ {{{
 const initialState = 0
 export default function counterReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 
   return handler ? handler(state, action) : state
 }
+// -------------------------------- }}}
 
 // ------------------------------------
-// Sagas
-// ------------------------------------
+// Sagas -------------------------- {{{
 export function *doubleAsync () {
   while (true) {
     yield take(COUNTER_DOUBLE)
@@ -60,12 +56,12 @@ export function *doubleAsync () {
 export const sagas = [
   doubleAsync
 ]
+// -------------------------------- }}}
 
-// ------------------------------------
-// Selectors
-// ------------------------------------
+// Selectors ---------------------- {{{
 export const counterSelector = state => state.counter
 export const squareRootSelector = createSelector(
   counterSelector,
   counter => Math.sqrt(counter)
 )
+// -------------------------------- }}}
