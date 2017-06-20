@@ -15,7 +15,6 @@ export const Counter = (props) => (
     </button>
   </div>
 )
-
 Counter.propTypes = {
   root        : PropTypes.number.isRequired,
   counter     : PropTypes.number.isRequired,

@@ -3,6 +3,7 @@ import { delay } from 'redux-saga'
 import { take, put, select } from 'redux-saga/effects'
 
 // Constants ---------------------- {{{
+export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
 export const COUNTER_DOUBLE = 'COUNTER_DOUBLE'
 // -------------------------------- }}}
 
